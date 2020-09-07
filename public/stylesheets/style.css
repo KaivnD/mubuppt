@@ -6,3 +6,63 @@ body {
 a {
   color: #00B7FF;
 }
+
+.bold {
+  font-weight: 700
+}
+
+.italic{
+  font-style: italic
+}
+
+.underline {
+  text-decoration: underline
+}
+
+.highlight-red{
+  background-color: #fbbfbc
+}
+
+.highlight-yellow{
+  background-color: #f8e6ab
+}
+
+.highlight-pink{
+  background-color: #fdddef
+}
+
+.highlight-blue{
+  background-color: #bacefd
+}
+
+.highlight-cyan{
+  background-color: #a9efe6
+}
+
+.highlight-olive{
+  background-color: #dfee96
+}
+
+.highlight-grey{
+  background-color: #bbbfc4
+}
+
+.text-color-red{
+  color: #dc2d1e!important
+}
+
+.text-color-yellow{
+  color: #ffaf38!important
+}
+
+.text-color-green{
+  color: #75c940!important
+}
+
+.text-color-blue{
+  color: #3da8f5!important
+}
+
+.text-color-purple{
+  color: #797ec9!important
+}
