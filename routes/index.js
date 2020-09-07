@@ -25,7 +25,7 @@ const parseStringArgs = str => {
   for(let conf of config) {
     let t = conf.split("=")
     if (t.length !== 2)continue
-    res[t[0]] = t[1]
+    res[t[0]] = t[1].replace(/<[^>]*>|<\/[^>]*>/gm, "")
   }
   return res
 }
@@ -55,7 +55,7 @@ router.get('/:doc', (req, res) => {
 
       slides.push({
         title: name,
-        template: 'center-title'
+        template: 'title-center'
       })
 
       for (let node of doc.nodes) {
@@ -64,7 +64,7 @@ router.get('/:doc', (req, res) => {
         slides.push({
           title: node.text,
           subtitle: !node.note ? "" : node.note.replace(/\{(.+?)\}/g, ""),
-          template: 'center-title',
+          template: 'title-center',
           ...parseStringArgs(node.note)
         })
 
@@ -85,7 +85,7 @@ router.get('/:doc', (req, res) => {
           slides.push({
             title: child.text,
             subtitle: !child.note ? "" : child.note.replace(/\{(.+?)\}/g, ""),
-            template: 'center-title',           
+            template: 'title-center',           
             items,
             ...parseStringArgs(child.note)
           })

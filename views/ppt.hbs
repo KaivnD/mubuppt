@@ -26,6 +26,10 @@
     .specs li span {
       font-size: initial;
     }
+
+    hr.black {
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0, rgba(255, 255, 255, 0) 75%);
+    }
   </style>
 </head>
 
@@ -33,15 +37,13 @@
   <main role="main">
     <article id="webslides">
       {{#each slides}}
-      <section class="bg-{{bg}}">
         {{> (lookup . 'template') . }}
-      </section>
       {{/each}}
     </article>
   </main>
   <script src="/webslides/js/webslides.js"></script>
   <script>
-    window.ws = new WebSlides();
+    window.ws = new WebSlides({loop: false});
   </script>
   <script defer src="/webslides/js/svg-icons.js"></script>
 </body>
