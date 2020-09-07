@@ -35,18 +35,12 @@ router.get('/:doc', (req, res) => {
   if (docId.startsWith("doc")) docId = docId.replace("doc", "")
 
   post(docGetApi, { docId }).then(data => {
-    if (data.data.code !== 0) {
-      res.render('error', { message: `failed to open mubu document id ${id}` })
-      return
-    }
+    if (data.data.code !== 0) throw new Error(`Could not find a mubu document with ID: ${docId}`)
     const { name, definition } = data.data.data
     const doc = JSON.parse(definition)
 
-    if (!(doc.nodes instanceof Array)) {
-      res.render('error', { message: `document has no nodes array` })
-      return
-    }
-
+    if (!(doc.nodes instanceof Array)) throw new Error(`document has no nodes array`)
+    
     const slides = []
 
     slides.push({
@@ -89,7 +83,7 @@ router.get('/:doc', (req, res) => {
     }
 
     res.render('ppt', { title: name, slides })
-  }).catch(err => res.render('error', {message: `Could not find a mubu document with ID: ${docId}`}))
+  }).catch(err => res.render('error', {message: err.message, status: err.status, stack: err.stack}))
 })
 
 module.exports = router;
