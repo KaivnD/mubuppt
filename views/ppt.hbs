@@ -1,70 +1,49 @@
 <!doctype html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="zh-CN">
+<!-- CLEAN MARKUP = GOOD KARMA.
+    Hi source code lover,
 
-    <!-- CLEAN MARKUP = GOOD KARMA.
-      Hi source code lover,
+    you're a curious person and a fast learner ;)
+    Let's make something beautiful together. Contribute on Github:
+    https://github.com/webslides/webslides
 
-      you're a curious person and a fast learner ;)
-      Let's make something beautiful together. Contribute on Github:
-      https://github.com/webslides/webslides
+    Thanks!
+    -->
 
-      Thanks!
-      -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- SEO -->
-    <title>WebSlides Landings: Create your web presence easily</title>
-    <meta name="description" content="WebSlides is the easiest way to create HTML presentations and landings. 120+ free slides ready to use.">
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+    rel="stylesheet">
 
-    <!-- URL CANONICAL -->
-    <!-- <link rel="canonical" href="http://your-url.com/permalink"> -->
+  <link rel="stylesheet" type='text/css' media='all' href="/webslides/css/webslides.css">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="all" href="/webslides/css/svg-icons.css">
+  <title>{{title}}</title>
+  <style>
+    .specs li span {
+      font-size: initial;
+    }
+  </style>
+</head>
 
-    <!-- CSS Base -->
-    <link rel="stylesheet" type='text/css' media='all' href="/webslides/css/webslides.css">
+<body>
+  <main role="main">
+    <article id="webslides">
+      {{#each slides}}
+      <section class="bg-{{bg}}">
+        {{> (lookup . 'template') . }}
+      </section>
+      {{/each}}
+    </article>
+  </main>
+  <script src="/webslides/js/webslides.js"></script>
+  <script>
+    window.ws = new WebSlides();
+  </script>
+  <script defer src="/webslides/js/svg-icons.js"></script>
+</body>
 
-    <!-- Optional - CSS SVG Icons (Font Awesome) -->
-    <link rel="stylesheet" type="text/css" media="all" href="/webslides/css/svg-icons.css">
-
-    <!-- Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#333333">
-  </head>
-  <body>
-    <main role="main">
-      <article id="webslides">
-
-        <!-- Quick Guide
-          - Each parent <section> in the <article id="webslides"> element is an individual slide.
-          - Vertical sliding = <article id="webslides" class="vertical">
-          - <div class="wrap"> = container 90% / <div class="wrap size-50"> = 45%;
-        -->
-        {{#each slides}}
-            <section>
-                <div class="wrap aligncenter">
-                    <h2><strong>{{title}}</strong></h2>
-                </div>
-                <!-- .end .wrap -->
-            </section>
-        {{/each}}
-
-      </article>
-    </main>
-    <!--main-->
-
-    <!-- Required -->
-    <script src="/webslides/js/webslides.js"></script>
-
-    <script>
-      window.ws = new WebSlides();
-    </script>
-
-    <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
-    <script defer src="/webslides/js/svg-icons.js"></script>
-
-  </body>
 </html>
