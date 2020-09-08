@@ -1,3 +1,5 @@
+/* mubu default text style */
+
 .bold {
   font-weight: 700
 }
@@ -56,4 +58,20 @@
 
 .text-color-purple{
   color: #797ec9!important
+}
+
+
+/* webslides slides override */
+
+.specs li span {
+  font-size: initial;
+}
+
+a.content-link {
+  display: inline-block;
+  width: auto;
+}
+
+hr.black {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0, rgba(255, 255, 255, 0) 75%);
 }
