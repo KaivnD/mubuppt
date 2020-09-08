@@ -1,0 +1,23 @@
+<section class="bg-{{bg}}">
+  <div class="wrap">
+    <div class="aligncenter" style="margin-bottom: 2em;">
+      <h2>{{{title}}}</h2>
+      <p>{{{subtitle}}}</p>
+    </div>
+    <ul class="flexblock gallery">
+      {{#each items}}
+      <li>
+        <a href="#">
+          <figure>
+            <img alt="{{header}}" src="https://api2.mubu.com/v3/{{img}}">
+            <figcaption>
+              <h2>{{{header}}}</h2>
+              <p>{{{content}}}</p>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</section>
