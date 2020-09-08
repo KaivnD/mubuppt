@@ -1,6 +1,20 @@
 <section class="bg-{{bg}}">
-  <div class="aligncenter">
-    <h2>{{{title}}}</h2>
-    <p>{{{subtitle}}}</p>
+  <div class="wrap">
+    <div class="aligncenter" style="margin-bottom: 2em;">
+      <h2>{{{title}}}</h2>
+      <p>{{{subtitle}}}</p>
+    </div>
+    <div class="content-center">
+      <ul class="flexblock reasons">
+        {{#each items}}
+        <li>
+          <div>
+            <h2>{{{header}}}</h2>
+            <p>{{{content}}}</p>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </section>
