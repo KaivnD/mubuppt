@@ -88,6 +88,17 @@ router.get("/:doc", async (req, res) => {
           continue;
         }
 
+        let imgSlideFlag = 0
+
+        if (
+          child.hasOwnProperty("images") &&
+          child.images instanceof Array &&
+          child.images.length > 0
+        ) {
+          slide.bgUrl = child.images[0].uri
+          slide.template = "img-side-full"
+        }
+
         for (let page of child.children) {
           const item = {
             header: page.text,
@@ -99,12 +110,14 @@ router.get("/:doc", async (req, res) => {
             page.images instanceof Array &&
             page.images.length > 0
           ) {
-            slide.template = "img-content"
+            ++imgSlideFlag            
             item.img = page.images[0].uri
           }
 
           slide.items.push(item);
         }
+
+        if (imgSlideFlag === child.children.length) slide.template = "img-content"
 
         slides.push(slide);
       }

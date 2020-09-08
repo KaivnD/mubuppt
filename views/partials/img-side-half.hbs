@@ -1,0 +1,24 @@
+<section>
+  <div class="wrap">
+    <div class="card-50 bg-white">
+      <figure>
+        <img alt="{{title}}" src="https://api2.mubu.com/v3/{{bgUrl}}">
+      </figure>
+      <div class="flex-content">
+        <h2>{{{title}}}</h2>
+        <p>{{{subtitle}}}</p>
+
+        <ul class="flexblock reasons">
+          {{#each items}}
+          <li>
+            <div>
+              <h2>{{{header}}}</h2>
+              <p>{{{content}}}</p>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
