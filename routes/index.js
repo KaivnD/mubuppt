@@ -28,15 +28,17 @@ const parseStringArgs = str => {
   return res
 }
 
-router.get('/:doc', (req, res) => {
+router.get('/:doc', async (req, res) => {
   let docId = req.params.doc
   if (!docId) res.status(403).send("Error:1")
 
   if (docId.startsWith("doc")) docId = docId.replace("doc", "")
 
-  post(docGetApi, { docId }).then(data => {
-    if (data.data.code !== 0) throw new Error(`Could not find a mubu document with ID: ${docId}`)
-    const { name, definition } = data.data.data
+  try {
+    const {data} = await post(docGetApi, { docId })
+
+    if (data.code !== 0) throw new Error(`Could not find a mubu document with ID: ${docId}`)
+    const { name, definition } = data.data
     const doc = JSON.parse(definition)
 
     if (!(doc.nodes instanceof Array)) throw new Error(`document has no nodes array`)
@@ -83,7 +85,10 @@ router.get('/:doc', (req, res) => {
     }
 
     res.render('ppt', { title: name, slides })
-  }).catch(err => res.render('error', {message: err.message, status: err.status, stack: err.stack}))
+
+  } catch (err) {
+    res.render('error', {message: err.message, status: err.status, stack: err.stack})
+  }
 })
 
 module.exports = router;
