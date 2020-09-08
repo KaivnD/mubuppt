@@ -9,6 +9,8 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+const removeAllHtmlTags = str => str.replace(/<[^>]*>|<\/[^>]*>/gm, "")
+
 const parseStringArgs = str => {
   const rg = /\{(.+?)\}/g
   const res = {}
@@ -23,7 +25,9 @@ const parseStringArgs = str => {
   for(let conf of config) {
     let t = conf.split("=")
     if (t.length !== 2)continue
-    res[t[0]] = t[1].replace(/<[^>]*>|<\/[^>]*>/gm, "")
+    const key = removeAllHtmlTags(t[0])
+    const value = removeAllHtmlTags(t[1])
+    res[key] = value
   }
   return res
 }
