@@ -4,7 +4,7 @@
   font-weight: 700
 }
 
-.italic{
+.italic {
   font-style: italic
 }
 
@@ -12,54 +12,53 @@
   text-decoration: underline
 }
 
-.highlight-red{
+.highlight-red {
   background-color: #fbbfbc
 }
 
-.highlight-yellow{
+.highlight-yellow {
   background-color: #f8e6ab
 }
 
-.highlight-pink{
+.highlight-pink {
   background-color: #fdddef
 }
 
-.highlight-blue{
+.highlight-blue {
   background-color: #bacefd
 }
 
-.highlight-cyan{
+.highlight-cyan {
   background-color: #a9efe6
 }
 
-.highlight-olive{
+.highlight-olive {
   background-color: #dfee96
 }
 
-.highlight-grey{
+.highlight-grey {
   background-color: #bbbfc4
 }
 
-.text-color-red{
+.text-color-red {
   color: #dc2d1e!important
 }
 
-.text-color-yellow{
+.text-color-yellow {
   color: #ffaf38!important
 }
 
-.text-color-green{
+.text-color-green {
   color: #75c940!important
 }
 
-.text-color-blue{
+.text-color-blue {
   color: #3da8f5!important
 }
 
-.text-color-purple{
+.text-color-purple {
   color: #797ec9!important
 }
-
 
 /* webslides slides override */
 
@@ -74,4 +73,15 @@ a.content-link {
 
 hr.black {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0, rgba(255, 255, 255, 0) 75%);
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 4.8rem;
+    line-height: 10rem;
+  }
+}
+
+p {
+  color: #999;
 }
