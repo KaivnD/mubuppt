@@ -3,6 +3,7 @@ var router = express.Router();
 const { post } = require("axios").default;
 
 const docGetApi = "https://api2.mubu.com/v3/api/document/view/get/";
+const shareGetApi = "https://api2.mubu.com/v3/api/document/share/get";
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -32,11 +33,29 @@ const parseStringArgs = (str) => {
   return res;
 };
 
+router.get("/doc/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    const { data } = await post(shareGetApi, { shareId: id });
+
+    if (data.code !== 0)
+      throw new Error(`Could not find a mubu document with ID: ${id}`);
+    const doc = data.data.doc;
+    if (!doc || !doc.id) throw new Error("origin doc id failed to find");
+
+    res.redirect(`/${doc.id}`);
+  } catch (ex) {
+    res.render("error", {
+      message: ex.message,
+      status: ex.status,
+      stack: ex.stack,
+    });
+  }
+});
+
 router.get("/:doc", async (req, res) => {
   let docId = req.params.doc;
   if (!docId) res.status(403).send("Error:1");
-
-  if (docId.startsWith("doc")) docId = docId.replace("doc", "");
 
   try {
     const { data } = await post(docGetApi, { docId });
@@ -72,12 +91,14 @@ router.get("/:doc", async (req, res) => {
       for (let child of node.children) {
         if (child.heading !== 2) continue;
 
+        const args = parseStringArgs(child.note);
+
         let slide = {
           title: child.text,
           subtitle: !child.note ? "" : child.note.replace(/\{(.+?)\}/g, ""),
           template: "title-center",
           items: [],
-          ...parseStringArgs(child.note),
+          ...args,
         };
 
         if (
@@ -88,15 +109,15 @@ router.get("/:doc", async (req, res) => {
           continue;
         }
 
-        let imgSlideFlag = 0
+        let imgSlideFlag = 0;
 
         if (
           child.hasOwnProperty("images") &&
           child.images instanceof Array &&
           child.images.length > 0
         ) {
-          slide.bgUrl = child.images[0].uri
-          slide.template = "img-side-full"
+          slide.bgUrl = child.images[0].uri;
+          slide.template = "img-side-full";
         }
 
         for (let page of child.children) {
@@ -110,14 +131,15 @@ router.get("/:doc", async (req, res) => {
             page.images instanceof Array &&
             page.images.length > 0
           ) {
-            ++imgSlideFlag            
-            item.img = page.images[0].uri
+            ++imgSlideFlag;
+            item.img = page.images[0].uri;
           }
 
           slide.items.push(item);
         }
 
-        if (imgSlideFlag === child.children.length) slide.template = "img-content"
+        if (imgSlideFlag === child.children.length)
+          slide.template = "img-content";
 
         slides.push(slide);
       }
